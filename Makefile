@@ -23,14 +23,14 @@ depsdev:
 	GO111MODULE=off go get github.com/Songmu/ghch/cmd/ghch
 
 crossbuild: depsdev
-	$(eval ver = v$(shell gobump show -r cmd/))
+	$(eval ver = v$(shell gobump show -r))
 	GO111MODULE=on goxz -pv=$(ver) -os=linux,darwin -arch=386,amd64 -build-ldflags="$(RELEASE_BUILD_LDFLAGS)" \
 	  -d=./dist/$(ver)
 
 prerelease:
-	$(eval ver = v$(shell gobump show -r cmd/))
+	$(eval ver = v$(shell gobump show -r))
 	ghch -w -N ${ver}
 
 release:
-	$(eval ver = v$(shell gobump show -r cmd/))
+	$(eval ver = v$(shell gobump show -r))
 	ghr -username k1LoW -replace ${ver} dist/${ver}
