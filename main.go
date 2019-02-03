@@ -25,6 +25,9 @@ func main() {
 	}
 	cmd := exec.Command("make", args[1:]...)
 	cmd.Dir = makefileDir
+	if !contains(args, []string{"-s", "--silent", "--quiet"}) {
+		fmt.Printf("(in %s)\n", makefileDir)
+	}
 	cmd.Env = os.Environ()
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -43,4 +46,15 @@ func findUpMakefileDir(dir string) (string, error) {
 	}
 	parentDir := filepath.Dir(dir)
 	return findUpMakefileDir(parentDir)
+}
+
+func contains(strs []string, substrs []string) bool {
+	for _, s := range strs {
+		for _, sub := range substrs {
+			if s == sub {
+				return true
+			}
+		}
+	}
+	return false
 }
