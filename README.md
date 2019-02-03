@@ -14,6 +14,7 @@ cat: Makefile: No such file or directory
 $ make hello
 make: *** No targets specified and no makefile found.  Stop.
 $ mk hello
+(in /path/to/deep)
 Hello make
 ```
 
