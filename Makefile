@@ -12,6 +12,13 @@ RELEASE_BUILD_LDFLAGS = -s -w $(BUILD_LDFLAGS)
 
 GO ?= GO111MODULE=on go
 
+ci: build test
+
+test:
+	cd testdata/; ./../mk testecho
+	cd testdata/path/to/deep; ./../../../../mk testecho
+	cd testdata/; TEST_ENV=mk ./../mk testenv
+
 build:
 	$(GO) build -ldflags="$(BUILD_LDFLAGS)"
 
