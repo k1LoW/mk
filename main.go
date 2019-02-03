@@ -25,6 +25,7 @@ func main() {
 	}
 	cmd := exec.Command("make", args[1:]...)
 	cmd.Dir = makefileDir
+	cmd.Env = os.Environ()
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	err = cmd.Run()
